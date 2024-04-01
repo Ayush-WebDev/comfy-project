@@ -1,5 +1,5 @@
 import "dotenv/config";
-
+import Stripe from "stripe";
 export async function handler(event, context) {
   if (event.body) {
     //// Body is not always available
@@ -9,7 +9,7 @@ export async function handler(event, context) {
       shipping,
     } = JSON.parse(event.body);
     /// Stripe package
-    const stripe = require("stripe")(process.env.VITE_STRIPE_SECRET_KEY);
+    const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
     /// Order total calculation
     const calculateOrderTotal = () => {
       // Replace this constant with a calculation of the order's amount

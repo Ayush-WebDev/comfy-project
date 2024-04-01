@@ -1,4 +1,4 @@
-require("dotenv").config();
+import "dotenv/config";
 
 export async function handler(event, context) {
   if (event.body) {

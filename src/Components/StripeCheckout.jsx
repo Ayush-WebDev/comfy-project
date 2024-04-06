@@ -111,7 +111,7 @@ const CheckoutForm = () => {
           ) : (
             <div style={{ paddingBottom: "1rem" }}>
               <h3>Hello, {user.given_name}</h3>
-              <p>Your order total : ${state.totalAmount}</p>
+              <p>Your order total : ${state.totalAmount.toFixed(2)}</p>
             </div>
           )}
         </div>
@@ -315,6 +315,7 @@ const StripeCheckoutWrapper = styled.div`
 
     form {
       width: 80vw;
+      padding: 10px;
     }
   }
 `;

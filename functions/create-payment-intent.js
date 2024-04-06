@@ -1,5 +1,7 @@
 import "dotenv/config";
 import Stripe from "stripe";
+
+//// Always use ECMA script 6 Lang instead of require in react
 export async function handler(event, context) {
   if (event.body) {
     //// Body is not always available

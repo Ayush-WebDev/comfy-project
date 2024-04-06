@@ -13,7 +13,7 @@ const CartItem = () => {
 
   return (
     <CartWrapper className="section-center">
-      {product.product.length < 1 ? (
+      {product?.product?.length < 1 ? (
         <div style={{ padding: "1rem", textAlign: "center" }}>
           <h3 style={{ textAlign: "center", marginBottom: "2rem" }}>
             Cart's empty, Fill it
@@ -33,7 +33,7 @@ const CartItem = () => {
               <div className="item-singular"></div>
             </div>
           </div>
-          {product.product.map((currentProduct, index) => {
+          {product?.product?.map((currentProduct, index) => {
             let {
               currentColor,
               product: newProduct,

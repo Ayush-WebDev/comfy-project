@@ -1,63 +1,97 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GridLayout from "./GridLayout";
 import RowLayout from "./RowLayout";
 import Filters from "./Filters";
 import styled from "styled-components";
 import { BsGrid, BsList } from "react-icons/bs";
-import { useLoaderData } from "react-router-dom";
+import { useFilterContext } from "../FilterContext";
+import Loader from "./Loader";
 const ProductsContainer = () => {
   const [layout, setLayout] = useState("grid");
-  const { products } = useLoaderData();
+  const { state, dispatch, fetchProducts } = useFilterContext();
+  const { filteredProducts, loadingProducts } = state;
   const sortProducts = [
     "Price (Lowest)",
     "Price (Highest)",
     "Name (A-Z)",
     "Name (Z-A)",
   ];
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+  const handleSort = (event) => {
+    const { name, value } = event.target;
+    dispatch({
+      type: "SORT_PRODUCTS",
+      payload: {
+        sortVal: value,
+      },
+    });
+  };
+
+  useEffect(() => {
+    dispatch({
+      type: "SORT_PRODUCTS",
+      payload: {
+        sortVal: "Price (Lowest)",
+      },
+    });
+  }, [filteredProducts]);
   return (
     <>
-      <ProductLayout className="section-center">
-        <div className="product-layout"></div>
-        <div className="row-container">
-          <div className="icons-group">
-            <div className="icons">
-              <BsGrid
-                className="btn-icon"
-                style={{
-                  backgroundColor: layout === "grid" && "#5f4435",
-                  color: layout === "grid" && "#fff",
-                }}
-                onClick={() => {
-                  setLayout("grid");
-                }}
-              />
-              <BsList
-                className="btn-icon"
-                style={{
-                  backgroundColor: layout != "grid" && "#5f4435",
-                  color: layout != "grid" && "#fff",
-                }}
-                onClick={() => {
-                  setLayout("row");
-                }}
-              />
-            </div>
-            <div>{`${products.length} products found`}</div>
-            <div className="divider-center"></div>
-            <div className="sort-group">
-              <p>Sort by:</p>
-              <div>
-                <select className="sort-select" name="sort" id="sort">
-                  {sortProducts.map((sort, index) => {
-                    return <option key={index}>{sort}</option>;
-                  })}
-                </select>
+      {loadingProducts ? (
+        <Loader />
+      ) : (
+        <ProductLayout className="section-center">
+          <div className="product-layout">
+            <Filters />
+          </div>
+          <div className="row-container">
+            <div className="icons-group">
+              <div className="icons">
+                <BsGrid
+                  className="btn-icon"
+                  style={{
+                    backgroundColor: layout === "grid" && "#5f4435",
+                    color: layout === "grid" && "#fff",
+                  }}
+                  onClick={() => {
+                    setLayout("grid");
+                  }}
+                />
+                <BsList
+                  className="btn-icon"
+                  style={{
+                    backgroundColor: layout != "grid" && "#5f4435",
+                    color: layout != "grid" && "#fff",
+                  }}
+                  onClick={() => {
+                    setLayout("row");
+                  }}
+                />
+              </div>
+              <div>{`${filteredProducts?.length} products found`}</div>
+              <div className="divider-center"></div>
+              <div className="sort-group">
+                <p>Sort by:</p>
+                <div>
+                  <select
+                    className="sort-select"
+                    name="sort"
+                    id="sort"
+                    onChange={handleSort}
+                  >
+                    {sortProducts?.map((sort, index) => {
+                      return <option key={index}>{sort}</option>;
+                    })}
+                  </select>
+                </div>
               </div>
             </div>
+            <div>{layout === "grid" ? <GridLayout /> : <RowLayout />}</div>
           </div>
-          <div>{layout === "grid" ? <GridLayout /> : <RowLayout />}</div>
-        </div>
-      </ProductLayout>
+        </ProductLayout>
+      )}
     </>
   );
 };
@@ -66,7 +100,7 @@ const ProductLayout = styled.div`
   padding: 5rem 0;
   position: relative;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 0.4fr 1.6fr;
   justify-content: center;
   align-items: start;
   gap: 40px;

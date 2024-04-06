@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLoaderData, Link } from "react-router-dom";
 import styled from "styled-components";
 import AddToCart from "./AddToCart";
 import { formatPrice } from "../utils";
 import ImageBox from "./ImageBox";
 import { BsStar, BsStarFill, BsStarHalf, BsCheck } from "react-icons/bs";
+
 const SingleProductElement = () => {
   const { product } = useLoaderData();
-
+  console.log(product);
   const {
-    category,
-    company,
     id,
+    company,
+    category,
     images,
     colors,
     reviews,
@@ -25,6 +26,7 @@ const SingleProductElement = () => {
 
   return (
     <>
+      <div>prod</div>
       <ProductContainer className="section-center">
         <div>
           <Link className="btn" to="/products">

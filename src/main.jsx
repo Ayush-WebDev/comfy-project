@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import AppProvider from "./Context.jsx";
 import { Auth0Provider } from "@auth0/auth0-react";
-import AuthWrapper from "./Pages/AuthWrapper.jsx";
+import FilterProvider from "./FilterContext.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Auth0Provider
@@ -15,9 +15,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }}
       cacheLocation="localstorage"
     >
-      <AppProvider>
-        <App />
-      </AppProvider>
+      <FilterProvider>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </FilterProvider>
     </Auth0Provider>
   </React.StrictMode>
 );

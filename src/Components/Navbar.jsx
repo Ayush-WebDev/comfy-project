@@ -51,6 +51,10 @@ const Navbar = () => {
 };
 
 const NavContainer = styled.nav`
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 999999;
   height: 5rem;
   display: flex;
   align-items: center;

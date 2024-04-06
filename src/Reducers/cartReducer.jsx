@@ -102,6 +102,7 @@ export const cartReducer = (state, action) => {
         numOfProducts: state.numOfProducts - numCartDel,
         totalAmount: state.totalAmount - (newPrice / 100) * numCartDel,
       };
+
     default:
       return state;
   }

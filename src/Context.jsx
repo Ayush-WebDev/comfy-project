@@ -1,6 +1,7 @@
 import React, { useContext, useState, useReducer, useEffect } from "react";
 import { cartReducer } from "./Reducers/cartReducer";
 import { useAuth0 } from "@auth0/auth0-react";
+
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
@@ -16,7 +17,7 @@ const AppProvider = ({ children }) => {
     }
     return { total: 0, numOfProducts: 0, totalAmount: 0, product: [] };
   };
-  getProducts();
+
   const initialState = {
     total: getProducts().total,
     numOfProducts: getProducts().numOfProducts,

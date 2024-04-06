@@ -16,7 +16,7 @@ const CheckoutCard = () => {
         <div className="row-checkout">
           <div className="row-checkout-item">
             <div className="subtotal-title">Subtotal :</div>
-            <div className="checkout-text">${totalAmount.toFixed(2)}</div>
+            <div className="checkout-text">${totalAmount?.toFixed(2)}</div>
           </div>
           <div className="row-checkout-item">
             <div className="checkout-title">Shipping fee :</div>

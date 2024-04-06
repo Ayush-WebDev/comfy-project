@@ -1,16 +1,15 @@
 import React from "react";
-import { customFetch } from "../utils";
 import { SingleProductElement } from "../Components";
-export const loaderProduct = async ({ params }) => {
-  const productID = params.id;
+import { customFetch } from "../utils";
+
+export const loadedElement = async ({ params }) => {
   try {
-    const res = await customFetch(
-      `/react-store-single-product?id=${productID}`
-    );
-    return { product: res.data };
+    const id = params.id;
+    const prod = await customFetch(`/react-store-single-product?id=${id}`);
+    return { product: prod.data };
   } catch (error) {
+    setSingleProductLoading(false);
     console.log(error);
-    return null;
   }
 };
 

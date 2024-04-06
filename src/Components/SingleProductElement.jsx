@@ -26,7 +26,6 @@ const SingleProductElement = () => {
 
   return (
     <>
-      <div>prod</div>
       <ProductContainer className="section-center">
         <div>
           <Link className="btn" to="/products">

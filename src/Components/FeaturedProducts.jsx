@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useLoaderData } from "react-router-dom";
+import { useFilterContext } from "../FilterContext";
 import { Link } from "react-router-dom";
 const FeaturedProducts = () => {
-  const { products } = useLoaderData();
+  const {
+    state: { allProducts },
+  } = useFilterContext();
 
   return (
     <>
@@ -11,8 +13,8 @@ const FeaturedProducts = () => {
         <div className="section-center">
           <h2 className="title">Featured Products</h2>
           <div className="product-container">
-            {products.slice(0, 3).map((product, index) => {
-              const { id, name, price, image } = product;
+            {allProducts?.slice(0, 3).map((product, index) => {
+              const { id, name, price, image } = product.fields;
               return (
                 <div className="card-container" key={index}>
                   <div className="img-product">

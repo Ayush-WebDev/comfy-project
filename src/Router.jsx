@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { loader as homeLoader } from "./Pages/Landing";
+
 import {
   Landing,
   Products,
@@ -27,7 +27,6 @@ export const router = createBrowserRouter([
         index: true,
         element: <Landing />,
         errorElement: <ErrorElement />,
-        loader: homeLoader,
       },
       {
         path: "about",

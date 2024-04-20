@@ -4,6 +4,10 @@ export const customFetch = axios.create({
   baseURL: "https://course-api.com",
 });
 
+export const singleFetch = axios.create({
+  baseURL: "https://www.course-api.com/react-store-single-product",
+});
+
 export const productsFetch = axios.create({
   baseURL: "https://api.airtable.com/v0/appAljNgQztiwJRxR/Imported%20table",
 });
